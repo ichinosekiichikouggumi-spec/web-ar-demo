@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GitHub Pages WebAR Demo</title>
+    <!-- 画面がデバイスのサイズにフィットするように設定 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- 必要なライブラリの読み込み (CDN経由) -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <!-- AR体験に必須のスタイル -->
+    <style>
+        .a-loader-title {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<!-- bodyタグにAR.jsの設定を追加し、カメラ映像の表示とAR処理を有効化 -->
+<body style="margin : 0px; overflow: hidden;">
+    <!-- a-scene: 3DとAR処理のコンテナ -->
+    <a-scene 
+        vr-mode-ui="enabled: false" 
+        arjs="sourceType: webcam; detectionMode: mono; cameraParametersUrl: https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/camera-parameters/camera_para.dat;"
+        renderer="logarithmicDepthBuffer: true;"
+    >
+        <!-- a-marker: マーカーを検知する設定 -->
+        <!-- preset="hiro"で標準の「hiro」マーカーを使用します。 -->
+        <a-marker preset="hiro">
+            <!-- マーカーが検知されたときに表示される3Dオブジェクト (青い立方体) -->
+            <a-box 
+                position="0 0.5 0" 
+                rotation="0 45 0" 
+                color="#4CC3D9" 
+                shadow 
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 3000; easing: linear;"
+            ></a-box>
+        </a-marker>
+
+        <!-- マーカーが見つからないときも表示されるカメラ視点 -->
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+</html>
